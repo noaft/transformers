@@ -478,7 +478,7 @@ def main():
             return " ".join(["question:", _question.lstrip(), "context:", _context.lstrip()])
 
         inputs = [generate_input(question, context) for question, context in zip(questions, contexts)]
-        targets = [answer["text"][0] if len(answer["text"]) > 0 else "" for answer in answers]
+        targets = [answer["text"] if len(answer["text"]) > 0 else "" for answer in answers]
         return inputs, targets
 
     def preprocess_function(examples):
