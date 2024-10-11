@@ -71,7 +71,7 @@ class QuestionAnsweringSeq2SeqTrainer(Seq2SeqTrainer):
                 description="Evaluation",
                 # No point gathering the predictions if there are no metrics, otherwise we defer to
                 # self.args.prediction_loss_only
-                prediction_loss_only=True if compute_metrics is None else None,
+                prediction_loss_only=True,
                 ignore_keys=ignore_keys,
                 metric_key_prefix=metric_key_prefix,
             )
