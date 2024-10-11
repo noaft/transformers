@@ -71,7 +71,7 @@ class QuestionAnsweringSeq2SeqTrainer(Seq2SeqTrainer):
                 description="Evaluation",
                 # No point gathering the predictions if there are no metrics, otherwise we defer to
                 # self.args.prediction_loss_only
-                prediction_loss_only=True,
+                prediction_loss_only=True if compute_metrics is None else None,
                 ignore_keys=ignore_keys,
                 metric_key_prefix=metric_key_prefix,
             )
@@ -112,6 +112,7 @@ class QuestionAnsweringSeq2SeqTrainer(Seq2SeqTrainer):
             xm.master_print(met.metrics_report())
 
         self.control = self.callback_handler.on_evaluate(self.args, self.state, self.control, metrics)
+        print(metrics)
         return metrics
 
     def predict(
