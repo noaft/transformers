@@ -621,6 +621,22 @@ def main():
     )
 
     def compute_metrics(p: EvalPrediction):
+        predictions = p.predictions
+        labels = p.label_ids
+        f1_metric = evaluate.load("f1")
+        recall_metric = evaluate.load("recall")
+        
+        # Tính F1 và Recall
+        f1_score = f1_metric.compute(predictions=predictions, references=labels)['f1']
+        recall_score = recall_metric.compute(predictions=predictions, references=labels)['recall']
+
+        # Các chỉ số khác như EM (Exact Match)
+        squad_metric = metric.compute(predictions=predictions, references=labels)
+        print({
+            'f1-score: ', f1_metric,
+            'recall_score': recall_score,
+            'EM': squad_metric["exact_match"]
+        })
         return metric.compute(predictions=p.predictions, references=p.label_ids)
 
     # Post-processing:
