@@ -633,7 +633,7 @@ def main():
         # Các chỉ số khác như EM (Exact Match)
         squad_metric = metric.compute(predictions=predictions, references=labels)
         print({
-            'f1-score: ', f1_metric,
+            'f1-score: ': f1_metric,
             'recall_score': recall_score,
             'EM': squad_metric["exact_match"]
         })
